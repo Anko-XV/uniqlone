@@ -100,11 +100,10 @@
   /* Hero Section 
   center/cover no-repeat;
   */
-  .hero {
+  #hero-back {
 	position: relative;
-	background: url('/images/AOT-LOOKBOOK-BANNER-MOBILE_e3d290a5-d907-42a6-9ab3-81bd8cd0cb33_540x.jpg') center/contain no-repeat; /* Use contain instead of cover */
+	background: center/contain no-repeat; /* Use contain instead of cover */
   	background-color: #333; /* Fallback background color */
-  	height: 100vh; /* Full viewport height */
   	width: 100%;
   	transition: margin-top 0.3s ease; /* Adjust based on the height of the header */
   }
@@ -134,10 +133,7 @@
   
   /* Adjust hero text and padding for smaller screens */
   @media (max-width: 768px) {
-	.hero {
-	  padding: 50px 20px;
-	}
-  
+	
 	.hero h1 {
 	  font-size: 28px;
 	}
