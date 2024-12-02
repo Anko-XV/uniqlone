@@ -1,21 +1,19 @@
 // JavaScript Document
 document.addEventListener("DOMContentLoaded", () => {
-  // Toggle Navigation Menu
-  const toggleButton = document.querySelector(".nav-toggle");
+  const navToggle = document.querySelector(".nav-toggle");
   const sideNav = document.querySelector(".side-nav");
-  const closeButton = document.querySelector(".close-btn");
+  const closeBtn = document.querySelector(".close-btn");
 
-  // Open side navigation when hamburger menu is clicked
-  toggleButton.addEventListener("click", () => {
-    sideNav.style.left = "0"; // Slide in the side navigation
+  // Open Side Navigation
+  navToggle.addEventListener("click", () => {
+    sideNav.classList.add("open");
   });
 
-  // Close side navigation when close button is clicked
-  closeButton.addEventListener("click", () => {
-    sideNav.style.left = "-250px"; // Slide out the side navigation
+  // Close Side Navigation
+  closeBtn.addEventListener("click", () => {
+    sideNav.classList.remove("open");
   });
 });
-
 
   // Smooth Scroll for Anchor Links
   const links = document.querySelectorAll("a[href^='#']");

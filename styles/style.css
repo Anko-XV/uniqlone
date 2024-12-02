@@ -24,7 +24,9 @@
   /****************/
   /* JOUW STYLING */
   /****************/
-  
+  body {
+    overflow-x: hidden; /* Prevent horizontal scrolling issues */
+}
   /* Announcement Bar */
   .announcement-bar {
 	display: block;
@@ -70,11 +72,15 @@
 /*****************/
 /* Header Styling */
 header {
-	background-color: var(--light-color);
-	color: var(--light-color);
-	padding: 0.5rem var(--padding);
-	position: relative; /* Ensures absolute positioning inside header is relative */
-  }
+    display: flex;
+    justify-content: space-between; /* Space between logo and nav icons */
+    align-items: center; /* Center elements vertically */
+    background-color: var(--light-color);
+    padding: 0.5rem var(--padding);
+    position: sticky; /* Keeps the header fixed on scroll */
+    top: 0;
+    z-index: 10;
+}
   
   /* Desktop Header */
   .header-2__desktop {
@@ -82,44 +88,63 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	padding: 10px 20px;
-	background-color: var(--color-white);
-	border-bottom: 1px solid var(--color-gray-dark);
+	background-color: var(--light-color);
+	border-bottom: 1px solid var(--text-color);
 	position: sticky;
 	top: 0;
-	z-index: 10;
+	z-index: 1000;
   }
+  
   
   /* Left and Right Header Sections */
   .header-left,
   .header-right {
-	display: flex;
-	align-items: center;
-	gap: 15px;
+	  display: flex;
+	  flex-shrink: 0;
+	  align-items: center; /* Align items vertically */
+	  gap: 1rem; /* Space between icons */
   }
+  
+  .header-right {
+	  justify-content: flex-end; /* Right-align icons */
+  }
+  
+  .icon img,
+  .search-toggle img {
+	  width: 24px;
+	  height: 24px;
+  }
+  
   
   /* Center the Logo */
   .nav-logo {
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-  }
-  
-  .nav-logo img {
-	max-height: 50px;
-  }
+    flex: 1; /* Takes available space */
+    display: flex;
+    justify-content: center; /* Centers the logo */
+    align-items: center; /* Aligns logo vertically */
+}
+
+.nav-logo img {
+    max-height: 50px; /* Keep a consistent logo size */
+    max-width: 100%;
+}
 
   /* Side Navigation (Initially hidden) */
-.side-nav {
+  .side-nav {
 	position: fixed;
 	top: 0;
-	left: -250px; /* Off-screen to the left */
+	left: -250px; /* Initially hidden */
 	width: 250px;
 	height: 100%;
 	background-color: var(--secondary-color);
 	color: var(--light-color);
-	transition: left 0.3s ease; /* Smooth transition when opening and closing */
-	z-index: 100; /* Ensures it appears above other content */
-	padding-top: 60px; /* To ensure it doesn't overlap the logo */
+	z-index: 2000; /* Above everything else */
+	padding-top: 60px;
+	transition: left 0.3s ease;
+  }
+  
+  .side-nav.open {
+	left: 0; /* Slide in */
   }
   
   .side-nav ul {
@@ -138,24 +163,8 @@ header {
 	font-size: 1.2rem;
   }
   
-  /* Close button for side navigation */
-  .close-btn {
-	font-size: 2rem;
-	color: var(--light-color);
-	background: none;
-	border: none;
-	position: absolute;
-	top: 10px;
-	right: 20px;
-	cursor: pointer;
-  }
-   
-  /* Icon Styling */
-  .icon img,
-  .search-toggle img {
-	width: 24px;
-	height: 24px;
-	cursor: pointer;
+  .side-nav ul li a:hover {
+	color: var(--link-hover-color);
   }
   
   /* Navigation Toggle Button */
@@ -166,31 +175,54 @@ header {
 	cursor: pointer;
   }
   
-  /* Responsive Design for Smaller Screens */
-  @media (max-width: 768px) {
-	.header-2__desktop {
-	  flex-wrap: wrap;
-	  justify-content: center; /* Center everything on smaller screens */
-	  padding: 10px 10px;
-	}
+  .close-btn {
+	font-size: 2rem;
+	color: var(--light-color);
+	background: none;
+	border: none;
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	cursor: pointer;
+  }
   
-	.header-left,
-	.header-right {
-	  gap: 10px;
-	  justify-content: center; /* Make sure items are centered in the left and right */
-	}
-  
-	.nav-logo img {
-	  max-height: 40px; /* Make logo smaller on mobile */
-	}
-
-	.side-nav {
-		left: -250px; /* Hide by default on small screens */
-	  }
+   
+  /* Icon Styling */
+  .icon img,
+  .search-toggle img {
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+	flex: 1;
+    text-align: right;
   }
   
   
   
+  /* Responsive Design for Smaller Screens */
+  @media (max-width: 768px) {
+    header {
+        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        padding: 0.75rem;
+    }
+
+    .header-left,
+    .header-right {
+        justify-content: center; /* Center icons on smaller screens */
+        flex: 1; /* Spread evenly */
+    }
+
+    .nav-logo {
+        order: -1; /* Ensure logo is in the middle */
+    }
+
+    .nav-logo img {
+        max-height: 40px; /* Reduce logo size */
+    }
+	.side-nav {
+		left: -250px; /* Hide by default on small screens */
+	  }
+} 
   /* Hero Section */
   #hero-back {
 	position: relative;
