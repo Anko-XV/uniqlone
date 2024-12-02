@@ -23,11 +23,12 @@
 			<!-- Left Navigation -->
 			<div class="header-left">
 			  <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
-			  <button class="search-toggle" aria-label="Search">
+
+			  <a class="search-toggle" aria-label="Search">
 				<img src="/images/search-icon.svg" alt="Search" />
-			  </button>
+			  </a>
 			</div>
-		  
+
 			<!-- Logo in the middle -->
 			<div class="nav-logo">
 			  <a href="#home" aria-label="Home">
@@ -43,6 +44,8 @@
 			  <a href="#cart" class="icon" aria-label="Shopping Cart">
 				<img src="/images/cart-icon.svg" alt="Shopping Cart" />
 			  </a>
+			  <button class="dark-mode-toggle" aria-label="Toggle dark mode">🌙</button>
+
 			</div>
 		  
 			<!-- Side Navigation -->
@@ -65,46 +68,90 @@
         <!-- Hero Section -->
         <section id="hero" class="hero">
 			<img id="hero-back"src="/images/AOT-LOOKBOOK-BANNER-MOBILE_e3d290a5-d907-42a6-9ab3-81bd8cd0cb33_540x.jpg" alt="">
-            <a href="#products" class="cta-button" aria-label="Shop Now">Shop Now</a>
+            <a href="products.html" class="cta-button" aria-label="Shop Now">Shop Now</a>
         </section>
 
         <!-- Reviews Section -->
-        <section id="reviews" class="customer-reviews">
-            <h2>Our Customers Love Us</h2>
-            <div class="reviews">
-                <div class="review">
-                    <h4>Andrew</h4>
-                    <p>Really cool and unique products!</p>
-                </div>
-                <!-- Add more reviews as needed -->
-            </div>
-        </section>
+<section class="carousel" aria-label="Customer Reviews">
+	<button class="carousel-control prev" aria-label="Previous Review">←</button>
+	<div class="carousel-track">
+	  <article class="carousel-item">
+		<h3>John Doe</h3>
+		<p>"Excellent service and quality products!"</p>
+	  </article>
+	  <article class="carousel-item">
+		<h3>Jane Smith</h3>
+		<p>"A seamless shopping experience from start to finish."</p>
+	  </article>
+	  <article class="carousel-item">
+		<h3>Mike Brown</h3>
+		<p>"I would highly recommend this store to my friends."</p>
+	  </article>
+	</div>
+	<button class="carousel-control next" aria-label="Next Review">→</button>
+  </section>
+  
+  <img src="images/WEB-COLLAB-BLOCK-yellow-bg-off-center_1080x.jpg" alt="A descriptive text of the image" class="responsive-image" />
 
-        <!-- Featured Products Section -->
-        <section id="products" class="featured-products">
-            <h2>Featured Products</h2>
-            <div class="product-grid">
-                <div class="product">
-                    <img src="product1.jpg" alt="Survey Cloak Jacket">
-                    <h3>Survey Cloak Jacket</h3>
-                    <p>$150.00</p>
-                </div>
-                <!-- Add more products as needed -->
-            </div>
-        </section>
+ <!-- Announcement Bar -->
+ <div class="announcement-bar-white">
+  <div class="sf__scrolling-text-">
+    <p>🚨 GOLDEN ANT X ASTROBOY 🚨</p>
+  </div>
+</div>
+<!-- Featured Products Section: Attack on Titan -->
+<section id="products" class="featured-products">
+  <h2>Attack on Titan</h2>
+  <div class="product-grid">
+    <div class="product">
+      <img src="product1.jpg" alt="Survey Cloak Jacket">
+      <h3>Survey Cloak Jacket</h3>
+      <p>$150.00</p>
+    </div>
+    <!-- Add more products as needed -->
+  </div>
+</section>
 
-        <!-- TikTok Carousel -->
-        <section class="social-section">
-            <h2>Swipe to Discover</h2>
-            <div class="carousel">
-                <button class="carousel-left" aria-label="Scroll left">&lt;</button>
-                <div class="social-feed">
-                    <div class="social-item"><img src="tiktok1.jpg" alt="Post 1"></div>
-                    <!-- Add more TikTok items as needed -->
-                </div>
-                <button class="carousel-right" aria-label="Scroll right">&gt;</button>
-            </div>
-        </section>
+<!-- Announcement Bar (Repeated) -->
+<div class="announcement-bar-white">
+  <div class="sf__scrolling-text-">
+    <p>🚨 GOLDEN ANT X ASTROBOY 🚨</p>
+  </div>
+</div>
+
+<!-- Featured Products Section: Astroboy -->
+<section id="products" class="featured-products">
+  <h2>Astroboy</h2>
+  <div class="product-grid">
+    <div class="product">
+      <img src="product1.jpg" alt="Astroboy Product">
+      <h3>Astroboy Product</h3>
+      <p>$150.00</p>
+    </div>
+    <!-- Add more products as needed -->
+  </div>
+</section>
+
+<!-- TikTok Carousel Section -->
+<section class="social-section">
+  <h2>Swipe to Discover</h2>
+  <div class="carousel-tiktok">
+    <button class="carousel-left" aria-label="Scroll left">&lt;</button>
+    <div class="social-feed">
+      <div class="social-item">
+        <img src="tiktok1.jpg" alt="TikTok Post 1">
+      </div>
+      <div class="social-item">
+        <img src="tiktok2.jpg" alt="TikTok Post 2">
+      </div>
+      <div class="social-item">
+        <img src="tiktok3.jpg" alt="TikTok Post 3">
+      </div>
+      <!-- Add more TikTok items as needed -->
+    </div>
+    <button class="carousel-right" aria-label="Scroll right">&gt;</button>
+  </div>
+</section>
 
         <!-- Newsletter Section -->
         <section id="community" class="newsletter">
@@ -131,6 +178,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="/scripts/script.js"></script>
 </body>
 </html>

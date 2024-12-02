@@ -24,53 +24,72 @@
   /****************/
   /* JOUW STYLING */
   /****************/
-  body {
-    overflow-x: hidden; /* Prevent horizontal scrolling issues */
-}
+  body.dark-mode {
+	--primary-color: #f0b74b; /* Slightly brighter golden accent */
+	--secondary-color: #111; /* Darker background for contrast */
+	--light-color: #181818; /* Dark mode background */
+	--text-color: #e0e0e0; /* Light text for contrast */
+	--link-hover-color: #fbb34b; /* Brighter gold hover effect */
+	--bg-color: #202020; /* Neutral background for cards and carousels */
+	--border-color: #444; /* Softer borders */
+	overflow-x: hidden; /* Prevent horizontal scrolling issues */
+  }
+  
   /* Announcement Bar */
-  .announcement-bar {
+/* Announcement Bar */
+.announcement-bar {
 	display: block;
 	justify-content: center;
 	align-items: center;
-	background-color: var(--primary-color);
-	color: #333;
+	background-color: var(--primary-color); /* Golden Accent */
+	color: #333; /* Text color */
 	font-size: 1rem;
 	text-align: center;
 	position: relative;
 	overflow: hidden; /* Ensures scrolling text is contained */
-        max-height: none;
-        margin-right: 0;
-    }
-
+	margin-right: 0;
+  }
   
-  
+  /* Scrolling Text Container */
   .sf__scrolling-text {
 	width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    overflow: hidden;
-    white-space: nowrap;
-    vertical-align: baseline;
-	animation: scrollText 10s linear infinite;
+	height: auto;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	overflow: hidden;
+	white-space: nowrap;
+	vertical-align: baseline;
+	animation: scrollText 10s linear infinite; /* Apply scrolling animation */
   }
   
+  /* Scroll Text Animation */
   @keyframes scrollText {
 	0% {
-	  transform: translateX(100%);
+	  transform: translateX(100%); /* Start from the right */
 	}
 	100% {
-	  transform: translateX(-100%);
+	  transform: translateX(-100%); /* End at the left */
 	}
   }
   
-  /* Header Styles */
+  /* White Background Announcement Bar */
+  .announcement-bar-white {
+	background-color: #f0f0f0; /* Light background */
+	padding: 10px 0;
+	text-align: center;
+  }
+  
+  /* Scrolling Text Style for White Background */
+  .sf__scrolling-text- p {
+	font-size: 1.2rem;
+	margin: 0;
+	font-weight: bold;
+  }
+  
 /*****************/
 /* HEADER STYLES */
-/*****************/
-/* Header Styling */
 header {
     display: flex;
     justify-content: space-between; /* Space between logo and nav icons */
@@ -259,34 +278,93 @@ header {
 	transition: background-color 0.3s ease;
 	
   }
-  
-  .cta-button:hover {
-	background-color: #000; /* Slight darkening */
-  }
+
+  .cta-button,
+.newsletter button {
+  color: var(--light-color); /* White or light color for the text */
+}
+
+body.dark-mode .cta-button,
+body.dark-mode .newsletter button {
+  color: var(--text-color); /* Light gray text for contrast in dark mode */
+}
   
   /* Reviews Section */
-  .customer-reviews {
-	background-color: var(--light-color);
-	padding: 2rem var(--padding);
-	text-align: center;
-  }
-  
-  .customer-reviews h2 {
-	font-size: 1.75rem;
-  }
-  
-  .reviews {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-	gap: 1.5rem;
-  }
-  
-  .review {
+ /* Carousel Container */
+.carousel {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	width: 100%;
+	max-width: 800px; /* Adjust based on your layout */
+	margin: auto;
 	padding: 1rem;
-	background-color: #f8f8f8;
+	overflow: hidden; /* Hide overflowing reviews */
+  }
+  
+  /* Review Track */
+  .carousel-track {
+	display: flex;
+	transition: transform 0.5s ease-in-out;
+  }
+  
+  /* Each Review Item */
+  .carousel-item {
+	flex: 0 0 100%; /* Each item takes full width */
+	padding: 20px;
+	text-align: center;
+	background-color: #f9f9f9;
 	border: 1px solid #ddd;
-	border-radius: 0.5rem;
-	font-size: 1rem;
+	border-radius: 8px;
+  }
+  
+  .carousel-item h3 {
+	margin-bottom: 0.5rem;
+  }
+  
+  .carousel-item p {
+	font-size: 1.1rem;
+	color: #555;
+  }
+  
+  /* Carousel Controls (Prev/Next Buttons) */
+  .carousel-control {
+	background: none;
+	border: none;
+	font-size: 2rem;
+	color: #986c2a; /* Golden accent color */
+	cursor: pointer;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 10;
+  }
+  
+  .carousel-control.prev {
+	left: 10px;
+  }
+  
+  .carousel-control.next {
+	right: 10px;
+  }
+  
+  /* Hover effect for buttons */
+  .carousel-control:hover {
+	color: #e0921b; /* Brighten hover color */
+  }
+  
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+	.carousel-item {
+	  max-width: 90%; /* Reduce width on smaller screens */
+	}
+  }
+  
+  .responsive-image {
+	width: 100%;
+	height: auto;
+	display: block;
   }
   
   /* Featured Products */
@@ -321,37 +399,81 @@ header {
 	color: var(--primary-color);
   }
   
-  /* Carousel Section */
-  .carousel {
-	display: flex;
-	align-items: center;
-	overflow-x: auto;
-	gap: 1rem;
-	padding: 1rem var(--padding);
-	scroll-behavior: smooth;
-  }
-  
-  .carousel-left, .carousel-right {
-	background-color: var(--primary-color);
-	color: var(--light-color);
-	border: none;
-	padding: 0.5rem 1rem;
-	font-size: 1rem;
-	cursor: pointer;
-	border-radius: var(--border-radius);
-  }
-  
-  .social-feed {
-	display: flex;
-	gap: 1rem;
-  }
-  
-  .social-item img {
-	width: 8rem;
-	height: 8rem;
-	object-fit: cover;
-	border-radius: 0.5rem;
-  }
+  /* TikTok Carousel Section */
+.social-section {
+    padding: 2rem;
+    text-align: center;
+}
+
+.carousel-tiktok {
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden; /* Hide elements that are out of view */
+    width: 100%;
+    max-width: 800px; /* Adjust based on your desired width */
+    margin: auto;
+}
+
+.social-feed {
+    display: flex;
+    gap: 1rem;
+    transition: transform 0.3s ease-in-out; /* Smooth scrolling transition */
+}
+
+.social-item {
+    flex: 0 0 auto; /* Prevent items from shrinking or growing */
+    width: 100%;
+    max-width: 300px; /* Maximum width for each TikTok post */
+    height: auto;
+    border-radius: 8px; /* Rounded corners for images */
+    overflow: hidden;
+}
+
+.social-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* Rounded corners for images */
+}
+
+/* Left and Right Navigation Buttons */
+.carousel-left,
+.carousel-right {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.carousel-left {
+    left: 10px; /* Position left button */
+}
+
+.carousel-right {
+    right: 10px; /* Position right button */
+}
+
+.carousel-left:hover,
+.carousel-right:hover {
+    color: #e0921b; /* Hover effect with brighter gold */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .social-feed {
+        gap: 0.5rem; /* Less space on mobile */
+    }
+
+    .social-item {
+        max-width: 200px; /* Smaller size for mobile */
+    }
+}
+
   
   /* Newsletter Section */
   .newsletter {
