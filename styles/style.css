@@ -19,23 +19,67 @@
 	--padding: 1rem; /* Reusable padding unit */
 	--link-hover-color: #e0921b; /* Link hover effect */
 	--border-radius: 0.25rem; /* Border radius for consistent styling */
+	--bg-color: #ffffff; /* Background color for cards and content */
+	--border-color: #ddd; /* Default border color */
+	color-scheme: light dark; /* Support for system light/dark modes */
   }
   
-  /****************/
-  /* JOUW STYLING */
-  /****************/
-  body.dark-mode {
-	--primary-color: #f0b74b; /* Slightly brighter golden accent */
-	--secondary-color: #111; /* Darker background for contrast */
-	--light-color: #181818; /* Dark mode background */
-	--text-color: #e0e0e0; /* Light text for contrast */
-	--link-hover-color: #fbb34b; /* Brighter gold hover effect */
-	--bg-color: #202020; /* Neutral background for cards and carousels */
-	--border-color: #444; /* Softer borders */
+  /* Default Styles */
+  body {
+	background-color: var(--light-color);
+	color: var(--text-color);
 	overflow-x: hidden; /* Prevent horizontal scrolling issues */
   }
   
-  /* Announcement Bar */
+  a {
+	color: var(--primary-color);
+	text-decoration: none;
+  }
+  
+  a:hover {
+	color: var(--link-hover-color);
+  }
+  
+  /* Dark Mode */
+  html:has([value="dark"]:checked) {
+	--primary-color: #f0b74b;
+	--secondary-color: #111;
+	--light-color: #181818;
+	--text-color: #e0e0e0; /* Light text for dark mode */
+	--link-hover-color: #fbb34b;
+	--bg-color: #202020;
+	--border-color: #444;
+  }
+  
+  /* Light Mode */
+  html:has([value="light"]:checked) {
+	--primary-color: #986c2a; /* Golden Accent */
+	--secondary-color: #222; /* Dark Shade */
+	--light-color: #fff; /* White */
+	--text-color: #333; /* Standard Text Color */
+	--link-hover-color: #e0921b; /* Link hover effect */
+	--bg-color: #ffffff; /* Background color for cards and content */
+	--border-color: #ddd; /* Default border color */
+  }
+  
+  /* Add smooth transition for theme changes */
+  html {
+	transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Side Navigation in Dark Mode */
+html:has([value="dark"]:checked) .side-nav {
+	background-color: var(--secondary-color); /* Darker background */
+  }
+  
+  html:has([value="dark"]:checked) .side-nav ul li a {
+	color: var(--text-color); /* Light text color for links */
+  }
+  
+  html:has([value="dark"]:checked) .side-nav ul li a:hover {
+	color: var(--link-hover-color); /* Adjust hover color */
+  }
+
 /* Announcement Bar */
 .announcement-bar {
 	display: block;
@@ -82,12 +126,30 @@
   }
   
   /* Scrolling Text Style for White Background */
-  .sf__scrolling-text- p {
+  .sf__scrolling-text- {
 	font-size: 1.2rem;
 	margin: 0;
 	font-weight: bold;
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	overflow: hidden;
+	white-space: nowrap;
+	vertical-align: baseline;
+	animation: scrollText 10s linear infinite;
   }
-  
+
+  @keyframes scrolltext{
+	0% {
+	  transform: translateX(100%); /* Start from the right */
+	}
+	100% {
+	  transform: translateX(-100%); /* End at the left */
+	}
+  }
 /*****************/
 /* HEADER STYLES */
 header {
@@ -212,7 +274,7 @@ header {
   
   
   /* Responsive Design for Smaller Screens */
-  @media (max-width: 768px) {
+  @media (min-width:430) {
     header {
         flex-wrap: wrap; /* Allow wrapping on smaller screens */
         padding: 0.75rem;
@@ -372,9 +434,11 @@ body.dark-mode .newsletter button {
   
   .product-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-	gap: 1rem;
+	grid-template-columns: 1fr 1fr; /* 2 columns for mobile */
+	gap: 1rem; /* Space between grid items */
   }
+  
+
   
   .product img {
 	width: 100%;
@@ -391,6 +455,7 @@ body.dark-mode .newsletter button {
 	font-size: 1rem;
 	color: var(--primary-color);
   }
+  
   
   /* TikTok Carousel Section */
 .social-section {
@@ -539,11 +604,7 @@ body.dark-mode .newsletter button {
   }
   
   /* Responsive Design: Mobile First */
-  @media (min-width: 430px) {
-	/* Update layout for tablets and larger screens */
-	.product-grid {
-	  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-	}
+  
   
 	.reviews {
 	  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
@@ -552,7 +613,7 @@ body.dark-mode .newsletter button {
 	.carousel {
 	  gap: 2rem;
 	}
-  }
+  
   
   @media (min-width: 1024px) {
 	/* Update layout for larger screens */
