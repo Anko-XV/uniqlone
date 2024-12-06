@@ -1,34 +1,27 @@
-// JavaScript Document
 document.addEventListener("DOMContentLoaded", () => {
+  // Side Navigation
   const navToggle = document.querySelector(".nav-toggle");
   const sideNav = document.querySelector(".side-nav");
   const closeBtn = document.querySelector(".close-btn");
 
-  // Open Side Navigation
-  navToggle.addEventListener("click", () => {
-    sideNav.classList.add("open");
-  });
+  if (navToggle && sideNav && closeBtn) {
+    navToggle.addEventListener("click", () => sideNav.classList.add("open"));
+    closeBtn.addEventListener("click", () => sideNav.classList.remove("open"));
+  }
 
-  // Close Side Navigation
-  closeBtn.addEventListener("click", () => {
-    sideNav.classList.remove("open");
-  });
-});
+  // Dark Mode Toggle
+  const darkModeToggle = document.querySelector('.dark-mode-toggle');
+  const body = document.body;
+  if (darkModeToggle) {
+    if (localStorage.getItem('theme') === 'dark') {
+      body.classList.add('dark-mode');
+    }
 
-const darkModeToggle = document.querySelector('.dark-mode-toggle');
-const body = document.body;
-
-// Check if user has a preferred theme saved in localStorage
-if (localStorage.getItem('theme') === 'dark') {
-  body.classList.add('dark-mode');
-}
-
-darkModeToggle.addEventListener('click', () => {
-  body.classList.toggle('dark-mode');
-  // Save user preference
-  localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
-});
-
+    darkModeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+    });
+  }
 
   // Smooth Scroll for Anchor Links
   const links = document.querySelectorAll("a[href^='#']");
@@ -43,7 +36,7 @@ darkModeToggle.addEventListener('click', () => {
     });
   });
 
-  // Hero Hover Effect (Only if .hero exists)
+  // Hero Hover Effect
   const header = document.querySelector(".header-2__desktop");
   const hero = document.querySelector(".hero");
   if (header && hero) {
@@ -51,42 +44,36 @@ darkModeToggle.addEventListener('click', () => {
     header.addEventListener("mouseleave", () => hero.classList.remove("hovered"));
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const prevButton = document.querySelector('.carousel-control.prev');
-    const nextButton = document.querySelector('.carousel-control.next');
-    const track = document.querySelector('.carousel-track');
-    const items = document.querySelectorAll('.carousel-item');
-    let currentIndex = 0;
-  
-    const updateCarousel = () => {
-      const itemWidth = items[0].getBoundingClientRect().width; // Width of a single review
-      track.style.transform = `translateX(-${currentIndex * itemWidth}px)`; // Move track
-    };
-  
-    // Previous Button (Scroll Left)
-    prevButton.addEventListener('click', () => {
-      if (currentIndex > 0) {
-        currentIndex--;
-        updateCarousel();
-      }
-    });
-  
-    // Next Button (Scroll Right)
-    nextButton.addEventListener('click', () => {
-      if (currentIndex < items.length - 1) {
-        currentIndex++;
-        updateCarousel();
-      }
-    });
-  
-    // Optional: Adjust carousel when resizing (for responsiveness)
-    window.addEventListener('resize', updateCarousel);
-  
-    // Initialize the carousel
-    updateCarousel();
-  });
-  
+  // Carousel Initialization
+  const carouselPrev = document.querySelector('.carousel-control.prev');
+  const carouselNext = document.querySelector('.carousel-control.next');
+  const carouselTrack = document.querySelector('.carousel-track');
+  const carouselItems = document.querySelectorAll('.carousel-item');
+  let carouselIndex = 0;
 
+  if (carouselPrev && carouselNext && carouselTrack && carouselItems.length > 0) {
+    const updateCarousel = () => {
+      const itemWidth = carouselItems[0].getBoundingClientRect().width;
+      carouselTrack.style.transform = `translateX(-${carouselIndex * itemWidth}px)`;
+    };
+
+    carouselPrev.addEventListener('click', () => {
+      if (carouselIndex > 0) {
+        carouselIndex--;
+        updateCarousel();
+      }
+    });
+
+    carouselNext.addEventListener('click', () => {
+      if (carouselIndex < carouselItems.length - 1) {
+        carouselIndex++;
+        updateCarousel();
+      }
+    });
+
+    window.addEventListener('resize', updateCarousel);
+    updateCarousel();
+  }
 
   // Newsletter Form Submission
   const form = document.querySelector(".newsletter form");
@@ -96,7 +83,6 @@ darkModeToggle.addEventListener('click', () => {
       const emailInput = form.querySelector('input[type="email"]');
       const email = emailInput ? emailInput.value : "";
 
-      // Simple email validation
       if (email && /\S+@\S+\.\S+/.test(email)) {
         alert(`Thank you for subscribing, ${email}!`);
         form.reset();
@@ -105,32 +91,35 @@ darkModeToggle.addEventListener('click', () => {
       }
     });
   }
-  document.addEventListener("DOMContentLoaded", () => {
-    const leftButton = document.querySelector('.carousel-left');
-    const rightButton = document.querySelector('.carousel-right');
-    const feed = document.querySelector('.social-feed');
-    const items = document.querySelectorAll('.social-item');
-    let currentIndex = 0;
 
-    // Function to update the carousel position
-    function updateCarousel() {
-        const itemWidth = items[0].getBoundingClientRect().width;
-        feed.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-    }
+  // Social Feed Carousel
+  const leftButton = document.querySelector('.carousel-left');
+  const rightButton = document.querySelector('.carousel-right');
+  const feed = document.querySelector('.social-feed');
+  const socialItems = document.querySelectorAll('.social-item');
+  let socialIndex = 0;
 
-    // Move left
+  if (leftButton && rightButton && feed && socialItems.length > 0) {
+    const updateSocialCarousel = () => {
+      const itemWidth = socialItems[0].getBoundingClientRect().width;
+      feed.style.transform = `translateX(-${socialIndex * itemWidth}px)`;
+    };
+
     leftButton.addEventListener('click', () => {
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateCarousel();
-        }
+      if (socialIndex > 0) {
+        socialIndex--;
+        updateSocialCarousel();
+      }
     });
 
-    // Move right
     rightButton.addEventListener('click', () => {
-        if (currentIndex < items.length - 1) {
-            currentIndex++;
-            updateCarousel();
-        }
+      if (socialIndex < socialItems.length - 1) {
+        socialIndex++;
+        updateSocialCarousel();
+      }
     });
+
+    window.addEventListener('resize', updateSocialCarousel);
+    updateSocialCarousel();
+  }
 });

@@ -65,7 +65,8 @@
   /* Add smooth transition for theme changes */
   html {
 	transition: background-color 0.3s ease, color 0.3s ease;
-	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: auto; 
   }
   
   /* Side Navigation in Dark Mode */
@@ -79,6 +80,22 @@ html:has([value="dark"]:checked) .side-nav {
   
   html:has([value="dark"]:checked) .side-nav ul li a:hover {
 	color: var(--link-hover-color); /* Adjust hover color */
+  }
+/* Specific fix for grid and flex issues */
+.hero, .product-grid, .carousel, .social-feed {
+	max-width: 100%; /* Prevent grid and flex containers from overflowing */
+	overflow: hidden; /* Safeguard against content overflow */
+  }
+  
+  /* Responsive Images and Content */
+  img, video, iframe {
+	max-width: 100%; /* Ensure media does not exceed container width */
+	height: auto; /* Maintain aspect ratio */
+  }
+  /* Handle side navigation overflow */
+  .side-nav {
+	overflow-y: auto; /* Prevent horizontal scrolling on the side navigation */
+	max-width: 100%; /* Ensure it fits within the viewport */
   }
 
 /* Announcement Bar */
@@ -197,11 +214,13 @@ header {
     display: flex;
     justify-content: center; /* Centers the logo */
     align-items: center; /* Aligns logo vertically */
+	padding-right: 1em;
 }
 
 .nav-logo img {
     max-height: 50px; /* Keep a consistent logo size */
     max-width: 100%;
+	margin-left:0.5em;
 }
 
   /* Side Navigation (Initially hidden) */
@@ -247,6 +266,8 @@ header {
 	border: none;
 	font-size: 1.5rem;
 	cursor: pointer;
+	background-color:var(--bg-color);
+	color: var(--primary-color);
   }
   
   .close-btn {
@@ -269,6 +290,7 @@ header {
 	cursor: pointer;
 	flex: 1;
     text-align: right;
+	margin-right:0.27em;
   }
   
   
@@ -306,10 +328,18 @@ header {
   	transition: margin-top 0.3s ease; /* Adjust based on the height of the header */
   }
 
+	#hero-back{
+	grid-row: 1 / 6;
+    grid-column: 1 / -1;
+}
   .hero {
 	text-align: center;
 	background-color: var(--primary-color);
 	color: var(--light-color);
+	display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(6, 1fr);
+    min-height: 70vh;
   }
   
   .hero h1 {
@@ -323,25 +353,25 @@ header {
   
   .cta-button {
 	display: inline-block;
-	margin: 0 0 1.75rem;
+	line-height: 0px;
+	margin: 0 0 4rem;
 	padding: 1.125rem;
 	font-size: 1rem;
-	background-color: var(--secondary-color);
-	color: var(--light-color);
+	background-color: var(--light-color);
 	text-decoration: none;
-	border-radius: var(--border-radius);
+	text-decoration-color: var(--primary-color);
+	border-radius:var(--border-radius);
+	letter-spacing: .03em;
+    text-transform: uppercase;
 	transition: background-color 0.3s ease;
+	grid-row: 5 / 6;
+    grid-column: 2 / 4;
+    z-index: 2;
 	
   }
 
-  .cta-button,
 .newsletter button {
   color: var(--light-color); /* White or light color for the text */
-}
-
-body.dark-mode .cta-button,
-body.dark-mode .newsletter button {
-  color: var(--text-color); /* Light gray text for contrast in dark mode */
 }
   
   /* Reviews Section */
